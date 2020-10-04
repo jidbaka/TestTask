@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<span th:name = "globalNumberGroup" th:text ="'Группа №'+ ${globalNumberGroup}" ></span>
+
+
+<table border="1">
+    <tr>
+        <td width="120dp"> Дата Принятия </td>
+        <td width="500dp">ФИО студента </td>
+        <td width="100dp"> Действия </td>
+    </tr>
+    <tr th:if="${students.empty}">
+        <td colspan="2"> Група пуста </td>
+    </tr>
+    <tr th:each="students : ${students}">
+        <form method="post" action="/groupPage/delete">
+            <p>
+            <td><span th:text="${students.date}  "> </span></td>
+            <td><span th:text="${students.name}  "> </span></td>
+            <td><button  type="submit"  name="id" th:value="${students.id}"> Delete</button></td>
+        </form>
+        </p>
+    </tr>
+</table>
+    <div>
+        <form method="post" action="/groupPage/add">
+            <input type="text" name="name" placeholder="ФИО">
+            <button type="submit"> Принять нового студента </button>
+        </form>
+    </div>
+    <form method="get"  action=" http://localhost:8080">
+    <button  type="submit" >Вернутся к списку групп</button>
+    </form>
+</body>
+</html>
